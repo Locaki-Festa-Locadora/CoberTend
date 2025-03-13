@@ -38,20 +38,8 @@ jobs:
         with:
           azure_static_web_apps_api_token: ${{ secrets.AZURE_STATIC_WEB_APPS_API_TOKEN_VICTORIOUS_MUD_0EB88220F }}
           action: "upload"
-          ###### Repository/Build Configurations ######
           app_location: "/"  # Caminho para o código da sua aplicação (onde estão seus arquivos HTML e CSS)
           api_location: ""  # Caminho da API - não necessário aqui
           output_location: "/"  # Diretório de saída dos arquivos após o build - sem build, mantém "/"
           github_id_token: ${{ steps.idtoken.outputs.result }}
-          ###### End of Repository/Build Configurations ######
-
-  close_pull_request_job:
-    if: github.event_name == 'pull_request' && github.event.action == 'closed'
-    runs-on: ubuntu-latest
-    name: Close Pull Request Job
-    steps:
-      - name: Close Pull Request
-        id: closepullrequest
-        uses: Azure/static-web-apps-deploy@v1
-        with:
-          action: "close"
+          app_build_command: ""  # Comando vazio para pular o processo de build
